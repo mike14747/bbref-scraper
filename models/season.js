@@ -9,6 +9,10 @@ const Season = {
             .then(([rows]) => [rows, null])
             .catch((error) => [null, error]);
     },
+    addNewData: async (dataArr) => {
+        const queryString = 'INSERT INTO seasons VALUES ?;';
+        const queryParams = [dataArr];
+    },
 };
 
 module.exports = Season;
