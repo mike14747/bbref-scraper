@@ -29,7 +29,6 @@ app.use(require('./controllers/testController'));
 dbTest()
     .then(() => {
         app.use('/api/test', require('./controllers/testController'));
-        app.use('/api/auth', require('./controllers/authController'));
         app.use('/api', require('./controllers'));
     })
     .catch((error) => {
