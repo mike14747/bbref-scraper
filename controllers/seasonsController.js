@@ -7,11 +7,17 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/repopulate', async (req, res, next) => {
-    const seasons = [2020];
+    const startingSeason = 1990;
+    const endingSeason = 2020;
+    const seasonsArr = [];
 
     try {
-        const data = await getSeasonErrors(2020);
-        data ? res.json(data) : next(new Error('something went wrong'));
+        for (let i = startingSeason; i <= endingSeason; i++) {
+            const seasonData = await getSeasonErrors(i);
+            seasonsArr.push(seasonData);
+        }
+        const [data, error] = await Season.addNewData(seasonsArr);
+        data ? res.status(201).json({ message: `Successfully added ${data[1].affectedRows} new season of errors row(s) to the database!`, added: data[1].affectedRows }) : next(error);
     } catch (error) {
         next(error);
     }
