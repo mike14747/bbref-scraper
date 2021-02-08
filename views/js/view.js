@@ -1,7 +1,7 @@
 const fetchData = async () => {
     const response = await fetch('/api/seasons').catch(error => {
         console.log(error);
-        document.getElementById('view').innerHTML = '<h2 class="text-danger">An error occurred getting the data!</h2>';
+        document.getElementById('view').innerHTML = '<h4 class="text-danger">An error occurred getting the data!</h4>';
     });
     const data = await response.json();
 

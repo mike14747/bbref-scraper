@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/repopulate', async (req, res, next) => {
-    const startingSeason = 1916;
+    const startingSeason = 1916; // 1916 is the oldest year for data
     const endingSeason = 2020;
     const seasonsArr = [];
 
@@ -31,15 +31,6 @@ router.get('/repopulate', async (req, res, next) => {
         const [data, error] = await Season.addNewData(seasonsArr);
         const diff = process.hrtime(time);
         data ? res.status(201).json({ message: `Successfully added ${data[1].affectedRows} new season(s) of errors row(s) to the database in ${((diff[0] * NS_PER_SEC + diff[1]) / NS_PER_SEC).toFixed(2)} seconds!` }) : next(error);
-    } catch (error) {
-        next(error);
-    }
-});
-
-router.get('/:season', async (req, res, next) => {
-    try {
-        const [data, error] = await Season.getDataBySeason(req.params.season);
-        data ? res.json(data) : next(error);
     } catch (error) {
         next(error);
     }

@@ -14,9 +14,10 @@
             <li><a href="/view">View Data</a></li>
             <li><a href="/">Home</a></li>
         </ul>
-		<div class="my-5 text-center"><button id="repopulate">Repopulate Data</button></div>
-        <div id="root">
-            <div id="loading" class="p-5 text-center"><img src="images/loading.gif" /></div>
+		<div class="my-5 text-center"><button id="repopulate" onclick="startRepopulate()">Repopulate Data</button></div>
+        <div class="text-center">Note: this will take several minutes to complete.</div>
+        <div id="root" class="my-5">
+            <div class="p-5 text-center"><img src="images/loading.gif" id="loading" class="d-none" /></div>
         </div>
     </div>
 
