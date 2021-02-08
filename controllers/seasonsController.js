@@ -3,7 +3,12 @@ const Season = require('../models/season');
 const { getSeasonErrors } = require('./utils/repopulateFunctions');
 
 router.get('/', async (req, res, next) => {
-    res.sendStatus(200);
+    try {
+        const [data, error] = await Season.getDataForAllSeasons();
+        data ? res.json(data) : next(error);
+    } catch (error) {
+        next(error);
+    }
 });
 
 router.get('/repopulate', async (req, res, next) => {
@@ -23,13 +28,9 @@ router.get('/repopulate', async (req, res, next) => {
             const seasonData = await getSeasonErrors(i);
             seasonsArr.push(seasonData);
         }
-
-        // res.status(299).json(seasonsArr);
-
         const [data, error] = await Season.addNewData(seasonsArr);
         const diff = process.hrtime(time);
-
-        data ? res.status(201).json({ message: `Successfully added ${data[1].affectedRows} new season(s) of errors row(s) to the database in ${((diff[0] * NS_PER_SEC + diff[1]) / NS_PER_SEC).toFixed(2)} seconds!`, added: data[1].affectedRows }) : next(error);
+        data ? res.status(201).json({ message: `Successfully added ${data[1].affectedRows} new season(s) of errors row(s) to the database in ${((diff[0] * NS_PER_SEC + diff[1]) / NS_PER_SEC).toFixed(2)} seconds!` }) : next(error);
     } catch (error) {
         next(error);
     }
