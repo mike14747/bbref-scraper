@@ -6,8 +6,8 @@ set foreign_key_checks=0;
 
 -- --------------------------------------------------------
 
-CREATE TABLE `seasons` (
-    `season_id` int unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `position_errors` (
+    `id` int unsigned NOT NULL AUTO_INCREMENT,
     `season` int unsigned NOT NULL,
     `innings` decimal(7,2) NOT NULL,
     `errors_p` int unsigned NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE `seasons` (
     `errors_lf` int unsigned NOT NULL,
     `errors_cf` int unsigned NOT NULL,
     `errors_rf` int unsigned NOT NULL,
-    PRIMARY KEY (`season_id`)
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
 -- --------------------------------------------------------

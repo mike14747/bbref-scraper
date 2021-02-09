@@ -1,10 +1,11 @@
 const fetchData = async () => {
-    const response = await fetch('/api/seasons');
+    const response = await fetch('/api/errors');
     if (response.ok) {
         const data = await response.json();
         return data;
     } else {
-        throw new Error(`(code ${response.status})`);
+        const error = await response.json();
+        throw new Error(error.message);
     }
 };
 
@@ -24,7 +25,7 @@ const initiateFetch = () => {
             view.appendChild(table);
         })
         .catch(error => {
-            document.getElementById('view').innerHTML = `<h4 class="text-danger">An error occurred getting the data... ${error.message}</h4>`;
+            document.getElementById('view').innerHTML = `<h4 class="text-danger text-center">An error occurred getting the data! ${error.message}</h4>`;
         });
 };
 

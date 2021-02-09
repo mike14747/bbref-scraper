@@ -17,7 +17,7 @@ const getSeasonErrors = async (season) => {
         );
         return innings ? [season, parseFloat(innings.replace('.1', '.33').replace('.2', '.67')), ...allPositionErrors] : 0;
     } catch (error) {
-        console.log(error);
+        return null;
     }
 };
 

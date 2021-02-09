@@ -14,8 +14,17 @@
             <li><a href="/view">View Data</a></li>
             <li><a href="/">Home</a></li>
         </ul>
-		<div class="my-5 text-center"><button id="repopulate" onclick="startRepopulate()">Repopulate Data</button></div>
-        <div class="text-center">Note: this will take several minutes to complete.</div>
+		<div id="repop-div" class="my-5 text-center">
+            <h5 class="text-center">Repopulate Errors Data for years 1916 through 2020:</h5>
+            <div class="my-4"><button id="repopulate" onclick="startErrorsRepopulate()">Repopulate</button></div>
+            <div>Note: this can take several minutes to complete.</div>
+            <hr class="my-5 w-50" />
+            <h5 class="text-center my-4">Add Errors Data for a specific year:</h5>
+            <form id="singleSeasonForm">
+                <input type="number" min="1916" id="season" required />
+                <input type="submit" value="Add Season">
+            </form>
+        </div>
         <div id="root" class="my-5">
             <div class="p-5 text-center"><img src="images/loading.gif" id="loading" class="d-none" /></div>
         </div>
